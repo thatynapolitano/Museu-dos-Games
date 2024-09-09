@@ -1,0 +1,143 @@
+-- Filtrar jogo a partir de algo digitado pelo usuário em um campo de busca. O que foi digitado pelo usuário, eu armazeno em uma variável de nome @user_input.
+-- O resultado da query abaixo aparecerá todos os registros referente a um jogo em que verifico se a palavra "zelda" é parte do nome do jogo, ou descrição, ou do nome da publicadora ou do nome da desenvolvedora ou do ano de lançamento etc.
+-- O resultado é o próprio jogo The Legend of Zelda e também o jogo Tunic (O jogo Tunic na sua descrição contém uma comparação de jogabilidade com Zelda). 
+
+SET @user_input = '%zelda%';
+
+SELECT 
+    j.idJogo,
+    j.nome_jogo,
+    j.imagem_capa,
+    j.descricao,
+    j.data_lancamento,
+    j.numero_jogadores,
+    j.classificacao_etaria,
+    p.nome_plataforma,
+    g.nome_genero,
+    d.nome_desenvolvedor,
+    fr.nome_franquia,
+    pub.nome_publicador
+FROM 
+    Jogo j
+LEFT JOIN 
+    JogoPlataforma jp ON j.idJogo = jp.idJogo
+LEFT JOIN 
+    Plataforma p ON jp.idPlataforma = p.idPlataforma
+LEFT JOIN 
+    JogoGenero jg ON j.idJogo = jg.idJogo
+LEFT JOIN 
+    Genero g ON jg.idGenero = g.idGenero
+LEFT JOIN 
+    JogoDesenvolvedor jd ON j.idJogo = jd.idJogo
+LEFT JOIN 
+    Desenvolvedor d ON jd.idDesenvolvedor = d.idDesenvolvedor
+LEFT JOIN 
+    JogoFranquia jf ON j.idJogo = jf.idJogo
+LEFT JOIN 
+    Franquia fr ON jf.idFranquia = fr.idFranquia
+LEFT JOIN 
+    JogoPublicador jpub ON j.idJogo = jpub.idJogo
+LEFT JOIN 
+    Publicador pub ON jpub.idPublicador = pub.idPublicador
+WHERE 
+    (j.nome_jogo) LIKE @user_input 
+    OR (p.nome_plataforma) LIKE @user_input
+    OR (g.nome_genero) LIKE @user_input
+    OR (d.nome_desenvolvedor) LIKE @user_input
+    OR (fr.nome_franquia) LIKE @user_input
+    OR (pub.nome_publicador) LIKE @user_input
+    OR (j.descricao) LIKE @user_input
+    OR (j.data_lancamento) LIKE @user_input
+    OR (j.numero_jogadores) LIKE @user_input
+    OR (j.classificacao_etaria) LIKE @user_input;
+
+-- Comando para incluir um novo jogo no banco
+INSERT INTO jogo (idJogo, nome_jogo, imagem_capa, descricao, data_lancamento, numero_jogadores, classificacao_etaria)
+VALUES 
+    (6, 'NBA 2K14', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR01UC-BL4mW3mh8gFBSy04fQ7FQU3G14GkNQ&s', 'NBA 2K é a mais incrível experiência de simulação de basquete.', '2013-10-01', 1, 'E');
+SELECT * FROM jogo;
+
+INSERT INTO jogoplataforma (idJogo, idPlataforma)
+VALUES (6, 4);
+SELECT * FROM jogoplataforma;
+
+INSERT INTO publicador (IdPublicador, nome_publicador) 
+VALUES (5, "2K");
+SELECT * FROM publicador;
+
+INSERT INTO jogopublicador (IdJogo, idPublicador) 
+VALUES (6, 5);
+SELECT * FROM jogopublicador;
+
+INSERT INTO jogogenero (IdJogo, idGenero)
+VALUES (6, 5);
+SELECT * FROM jogogenero;
+
+INSERT INTO desenvolvedor (idDesenvolvedor, nome_desenvolvedor)
+VALUES (11, "Visual Concepts");
+SELECT * FROM desenvolvedor;
+
+INSERT INTO jogodesenvolvedor (idDesenvolvedor, idJogo)
+VALUES (11, 6);
+SELECT * FROM jogodesenvolvedor;
+
+INSERT INTO franquia (idFranquia, nome_franquia) 
+VALUES (6, "NBA 2k");
+SELECT * FROM franquia; 
+
+INSERT INTO jogofranquia (idJogo, idFranquia)
+VALUES (6, 6);
+SELECT * FROM jogofranquia; 
+
+INSERT INTO imagemgameplay (idImagemGameplay, idJogo, URL_imagem_gameplay)
+VALUES (12, 6, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvsoVicjvwx5mVHEUV-VAmb6_4FNi93_h2bQ&s");
+SELECT * FROM imagemgameplay;
+
+ -- Comando para atualizar a data de lançamento do jogo de id 5 (jogo Tetris)
+UPDATE jogo AS j
+SET j.data_lancamento = '2016-11-09'
+WHERE j.idJogo = 5;
+SELECT * FROM jogo; 
+
+-- Comandos para remover um jogo já cadastrado
+-- Deletar a Imagem Gameplay
+DELETE FROM imagemgameplay WHERE idImagemGameplay = 12;
+SELECT * FROM imagemgameplay;
+
+-- Deletar a Associação entre Jogo e Franquia
+DELETE FROM jogofranquia WHERE idJogo = 6; 
+SELECT * FROM jogofranquia;
+
+-- Deletar a Franquia
+DELETE FROM franquia WHERE idFranquia = 6;
+SELECT * FROM franquia;
+
+-- Deletar a Associação entre Jogo e Desenvolvedor
+DELETE FROM jogodesenvolvedor WHERE idJogo = 6;
+SELECT * FROM jogodesenvolvedor;
+
+-- Deletar o Desenvolvedor
+DELETE FROM desenvolvedor WHERE idDesenvolvedor = 11;
+SELECT * FROM desenvolvedor;
+
+-- Deletar a Associação entre Jogo e Gênero
+DELETE FROM jogogenero WHERE idJogo = 6;
+SELECT * FROM jogogenero;
+
+-- Deletar a Associação entre Jogo e Publicador
+DELETE FROM jogopublicador WHERE idJogo = 6;
+SELECT * FROM jogopublicador;
+
+-- Deletar o Publicador
+DELETE FROM publicador WHERE idPublicador = 5;
+SELECT * FROM publicador; 
+
+-- Deletar a Associação entre Jogo e Plataforma
+DELETE FROM jogoplataforma WHERE idJogo = 6;
+SELECT * FROM jogoplataforma;
+
+-- Deletar o Jogo
+DELETE FROM jogo WHERE idJogo = 6;
+SELECT * FROM jogo;
+
+
