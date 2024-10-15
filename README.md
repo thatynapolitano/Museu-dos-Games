@@ -10,7 +10,9 @@ Este projeto tem como objetivo desenvolver o banco de dados de um site documenta
 
 - Modelo Lógico (Relacional):
   - Normalizado com inclusão de chaves primárias e estrangeiras.
-  - Disponível em formato: .png 
+  - Disponível em formato: .png
+
+ ![Diagrama EER - Thatiana Napolitano](https://github.com/user-attachments/assets/74039ca0-fe5a-4b33-9203-b1f3a2e800a9)
 
 - Comandos SQL:
   - Quatro comandos SQL para operações específicas com base na regra de negócio.
@@ -20,8 +22,6 @@ Este projeto tem como objetivo desenvolver o banco de dados de um site documenta
   - Contém dados de teste e está no formato padrão do MySQL Workbench (.sql).
  
 O banco de dados foi modelado para atender às funcionalidades de visualização, busca e administração de informações dos jogos. As principais telas e ações disponíveis no site são descritas a seguir. 
-
-![Diagrama EER - Thatiana Napolitano](https://github.com/user-attachments/assets/74039ca0-fe5a-4b33-9203-b1f3a2e800a9)
 
 ## Funcionalidades do Site
 ### Visualização Geral dos Jogos:
