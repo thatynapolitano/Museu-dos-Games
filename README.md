@@ -3,7 +3,7 @@ Este projeto tem como objetivo desenvolver o banco de dados de um site documenta
 
 - Modelo Conceitual (Entidade-Relacionamento):
   - Inclui entidades, atributos, relacionamentos e cardinalidades.
-  - Realizado no no Draw.io
+  - Realizado no Draw.io
   - Disponível em formato: .png
  
   ![Diagrama ERD - Thatiana Napolitano](https://github.com/user-attachments/assets/47ffcdf8-55c4-4f47-888d-aa7ce740d692)
